@@ -22,7 +22,10 @@
 	if(!isliving(owner.current))
 		return 0
 	var/list/all_items = owner.current.get_contents()
-	for(var/obj/I in all_items) //Check for items
+	var/obj/item/organ/internalcontents = owner.current.get_organ("chest")
+	if(internalcontents)
+		all_items += internalcontents.contents
+	for(var/obj/I in all_items) // Check for items
 		if(istype(I, typepath) && check_special_completion(I))
 			return 1
 	return 0
